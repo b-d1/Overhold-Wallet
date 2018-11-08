@@ -51,7 +51,7 @@ After having these packages installed, you should be ready for installing the wa
 #### Wallet installation instructions
 
 1. Create a new directory on your machine and ` cd <directory-name> `
-2. `git clone https://github.com/blag0j/Resev.git .`
+2. `git clone https://github.com/overhold-org/Overhold-Wallet.git .`
 3. `npm install`
 4. `cd backend/`
 5. `npm install`
