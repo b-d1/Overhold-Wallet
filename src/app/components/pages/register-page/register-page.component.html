@@ -1,0 +1,22 @@
+<form name="register" class="register-page__form" (submit)="register(form)" #form="ngForm">
+    <ul class="register-page__message-box">
+        <li class="register-page__message--error" *ngFor="let message of errorMessages">{{message}}</li>
+    </ul>
+    <div class="input-field input-field--icon input-field--user">
+        <input class="input input--default" name="username" type="text" [(ngModel)]="username" placeholder="Username" minlength="3"
+            required>
+    </div>
+    <div class="input-field input-field--icon input-field--password">
+        <input class="input input--default" name="password" type="password" [(ngModel)]="password" placeholder="Password" required>
+    </div>
+    <div class="input-field input-field--icon input-field--password input-field--last">
+        <input class="input input--default" name="confirmPassword" type="password" [(ngModel)]="confirmPassword" placeholder="Confirm password"
+            required>
+    </div>
+    <button class="btn btn_access log_in register-page__button" [disabled]="registering">Register</button>
+</form>
+
+
+<div class="notification__message">
+    Creating a secure password is an important part of protecting your account.
+</div>

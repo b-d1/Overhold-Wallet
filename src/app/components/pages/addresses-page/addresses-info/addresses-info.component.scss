@@ -1,0 +1,38 @@
+.right_menu .grid_adresses .row {
+    display: -webkit-box;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.right_menu {
+    .full-fill-row {
+        max-width: none;
+        padding-left: 11px;
+    }
+    
+    .context-menu-button {
+        background-color: unset;
+        cursor: pointer;
+    }
+}
+
+.right_menu .grid_adresses .row--adress {
+    padding: 15px 30px;
+
+    .private_key {
+        padding-right:30px;
+    }
+}
+
+.key-func-button {
+    .btn_default {
+        margin-right: 10px;
+    }
+}
+
+.bottom_panel .info {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+}

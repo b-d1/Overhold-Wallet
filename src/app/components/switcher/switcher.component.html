@@ -1,0 +1,6 @@
+<div class="switcher" [ngClass]="theme && ('switcher--' + theme + '-theme')">
+  <div class="switcher__container" *ngFor="let stage of stages">
+      <input class="switcher__input" type="radio" id="switch_{{stage.type}}" name="{{stage.type}}" value="{{stage.type}}" (change)="changeState()" [(ngModel)]="activeStage"/>
+      <label class="switcher__label" for="switch_{{stage.type}}">{{stage.name}}</label>
+  </div>
+</div>

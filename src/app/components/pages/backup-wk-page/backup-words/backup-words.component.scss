@@ -1,0 +1,50 @@
+.body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .words_container{
+        width: 77%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        height: 127px;
+        min-height: 127px;
+
+        .wrap{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
+    .next{
+        margin: 0 auto;
+        margin-bottom: 80px;
+        margin-top: 80px;
+    }
+
+    .show {
+        margin-bottom: 80px;
+        margin-top: 80px;
+    }
+
+    .alert .attention {
+        line-height: 1.08;
+
+        &:before {
+            position: absolute;
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url(../../../../../img/sign_attention_red.png) no-repeat center;
+            background-size: contain;
+            left: calc(50% - 45px);
+        }
+    }
+}

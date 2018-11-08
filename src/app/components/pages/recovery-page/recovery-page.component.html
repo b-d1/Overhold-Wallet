@@ -1,0 +1,14 @@
+<form name="recovery" class="recovery-page__form" (submit)="recovery()">
+  <ul class="recovery-page__message-box">
+    <li class="recovery-page__message--error" *ngFor="let message of errorMessages">{{message}}</li>
+  </ul>
+  <div class="input-field input-field--area input-field--icon input-field--password input-field--area">
+    <textarea [disabled]="file !== null" name="mnemonic" class="input input--default input--area" type="text"
+      [(ngModel)]="mnemonic" rows="3" placeholder="Your mnemonic phrase"></textarea>
+  </div>
+  <button class="btn btn_access log_in recovery-page__button">Recover</button>
+</form>
+<!-- Check if the message is appropriate. -->
+<div class="notification__message">
+  * Please enter your 12 word phrase without spaces before and after it.
+</div>

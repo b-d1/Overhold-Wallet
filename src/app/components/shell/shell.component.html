@@ -1,0 +1,9 @@
+<app-menu class="left_menu"></app-menu>
+<div class="page">
+  <router-outlet #o="outlet"></router-outlet>
+</div>
+<div *ngIf="secuirityOn" class="main_wrap security_wrap">
+    <div class="view_container">
+        <security [callback]="callback" (closeSecurity)="closeSecurity()"></security>
+    </div>
+  </div>

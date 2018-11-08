@@ -1,0 +1,101 @@
+@import '../../../../css/variables';
+.adresses {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: $base-background-color;
+
+  .container{
+      margin-top: 40px;
+      height: calc(100% - 200px);
+      overflow: auto;      
+  }
+}
+
+.address-page__coin {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+}
+
+.address-page__coin--value {
+  display: flex;
+  align-items: center;
+}
+
+.address-page__address-info {
+  flex-grow: 1;
+}
+
+.address-page__coin-info {
+  display: flex;
+}
+
+.address-page__coin-item {
+  margin-left: 10px;
+}
+
+.addresses-page__filter-box {
+  display: flex;
+}
+
+.address-page__filter {
+  margin-right: 10px;
+}
+
+.address-page__control {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filters-container {
+  display: flex;
+  .filters {
+    display: flex;
+    margin-right: 20px;
+    font-size: 14px;
+    position: relative;
+
+    .dropdown-filter {
+      height: 30px;
+      width: 160px;
+    }
+
+    .currency-icon {
+      position: absolute;
+      margin: 0 15px;
+      top: -8px;
+      left: -60px;
+    }
+  }
+}
+.filters-container[hidden] { display: none; }
+
+.address-page__right-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 500px;
+  z-index: 2;
+  box-sizing: border-box;
+  height: 100vh;
+  background: #161a25;
+  display: flex;
+  flex-direction: column;
+}
+
+.alert .attention {
+  line-height: 1.08;
+
+  &:before {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: url(../../../../img/sign_attention_red.png) no-repeat center;
+      background-size: contain;
+      left: calc(44% - 45px);
+  }
+}

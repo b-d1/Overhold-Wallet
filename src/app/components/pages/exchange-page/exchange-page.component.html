@@ -1,0 +1,169 @@
+<div class="content flex_column exchange" [ngClass]="{'success-step' : step == 3}">
+    <div class="parent-container" [ngClass]="{'backgroun-empty': step == 3}">
+        <div class="common-container" *ngIf="step == 1">
+            <div class="exchange-conteiner left">
+                <div class="header">
+                    <ul class="breadcrumb">
+                        <li>Exchange</li>
+                    </ul>
+                    <switcher class="exchange-switcher" [stages]="stages" [activeStage]="activeStage"></switcher>
+                </div>
+                <div class="body">
+                    <div class="row__content currency-row">
+                        <div class="row__icon crypto_item eth"></div>
+                        <div class="main-info">
+                            <div class="row__title">Etheteum
+                                <span class="abbrev">(ETH)</span>
+                            </div>
+                            <div class="row__description">Available:
+                                <span class="available-sum">6.24050178951524 ETH ($72.17 USD)</span>
+                            </div>
+                        </div>
+                        <div class="arrow_down"></div>
+                    </div>
+
+                    <div class="amount-row">
+                        <div class="text__label">Amount</div>
+                        <div class="input-container">
+                            <input [(ngModel)]="exchangeAmount" type="number" step="0.1" class="form number-input" placeholder="0.0" min="0">
+                            <select class="currency coin-dropdown dropdown-filter">
+                                <option *ngFor="let coin of coinNames" [ngValue]="coin.name">{{ coin.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exchange-conteiner right">
+                <div class="header">
+                    <ul class="breadcrumb">
+                        <li>Receive</li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="row__content currency-row">
+                        <div class="row__icon crypto_item bit"></div>
+                        <div class="main-info">
+                            <div class="row__title">Bitcoin
+                                <span class="abbrev">(BTC)</span>
+                            </div>
+                            <div class="row__description">Available:
+                                <span class="available-sum">0.02118809 BTC ($13.36 USD)</span>
+                            </div>
+                        </div>
+                        <div class="arrow_down"></div>
+                    </div>
+
+                    <div class="amount-row">
+                        <div class="text__label">Amount</div>
+                        <div class="input-container">
+                            <input [(ngModel)]="receiveAmount" type="number" step="0.1" class="form number-input" placeholder="0.0" min="0">
+                            <select class="currency coin-dropdown dropdown-filter">
+                                <option *ngFor="let coin of coinNames" [ngValue]="coin.name">{{ coin.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="common-container" *ngIf="step == 3">
+            <div class="exchange-conteiner centre">
+                <div class="header">
+                    <ul class="breadcrumb">
+                        <li>Exchange</li>
+                    </ul>
+                    <ul class="subtitle">
+                        <li>Progress</li>
+                    </ul>
+                </div>
+                <video height="500" width="500" src="animation/exchange.mp4" [loop]="true" autoplay></video>
+            </div>
+        </div>
+
+
+        <div class="common-exchange-body">
+            <div class="exchange-info">
+                <div class="equality" *ngIf="step == 1">
+                    <span>1 BTC = 11.54321112 ETH</span>
+                </div>
+
+                <div class="success-exchange" *ngIf="step == 3">
+                    <span class="date">33:33</span>
+                    <span class="status">Your exchange in now in progress!</span>
+                    <span class="info">In 30 minutes or less your Ethereum will arrive. You can safely use or quit Exodus while anexchange is
+                        in progress.</span>
+                </div>
+
+                <div class="common-convertation-block" [ngClass]="{'process-step': step == 3}">
+                    <button class="arrow_btn left" *ngIf="step == 3">
+                        <img src="../../../../../src/img/arrow_left.png" />
+                    </button>
+                    <div class="convertation-block">
+                        <div class="excahnge-result left">
+                            <span class="title">YOU ARE EXCHANGING</span>
+                            <span>12 ETH</span>
+                            <span class="sum">$2 581.00</span>
+                            <span class="address" *ngIf="step == 3">1NSvynV4gm4w9H1rUu3ysj7Jdukx56Sojb</span>
+                        </div>
+                        <div class="excahnge-icons">
+                            <div class="row__icon crypto_item eth"></div>
+                            <div class="row__icon exchange-icon"></div>
+                            <div class="row__icon crypto_item bit"></div>
+                        </div>
+                        <div class="excahnge-result right">
+                            <span class="title">YOU ARE EXCHANGING</span>
+                            <span>0.9854 BTC</span>
+                            <span class="sum">$2 560.05</span>
+                            <span class="address" *ngIf="step == 3">XjFgujnYtLXWyedVnvchJK5BJAhfeDUtbs</span>
+                        </div>
+                    </div>
+                    <button class="arrow_btn right" *ngIf="step == 3">
+                        <img src="../../../../../src/img/arrow_right.png" />
+                    </button>
+                </div>
+
+                <div class="apply-block" *ngIf="step == 1">
+                    <div [ngClass]="{'slow_speed': speed === 1, 'medium_speed': speed === 2, 'fast_speed': speed === 3, 'visability-hidden': step !== 1}"
+                        class="exchange_speed">
+                        <input [(ngModel)]="speed" type="range" min="1" max="3" step="1">
+                        <div *ngIf="speed == 1">Slow</div>
+                        <div *ngIf="speed == 2">Average</div>
+                        <div *ngIf="speed == 3">Fast</div>
+                    </div>
+                    <div class="exchange-btn">
+                        <button class="btn btn_default" type="button" (click)="securityKey()">EXCHCANGE</button>
+                    </div>
+                </div>
+            </div>
+            <div class="stages transfer">
+                <div [ngClass]="{'active': step == 1}" class="sign_send stage_item"></div>
+                <div [ngClass]="{'active': step == 2}" class="sign_pin stage_item"></div>
+                <div [ngClass]="{'active': step == 3}" class="sign_complete stage_item"></div>
+            </div>
+        </div>
+    </div>
+    <div class="control footer" *ngIf="step == 1">
+        <div class="left">
+            <div class="attention">The spread for this transaction is 0.842%</div>
+        </div>
+        <div class="right">
+            <div class="block">
+                <div class="text">Network mining fee</div>
+                <div class="sum">0.0001 BTC (0.00 USD)</div>
+            </div>
+            <div class="block">
+                <div class="text">Exchange minimum</div>
+                <div class="sum">0.6580 ИЕС ($250.00 USD)</div>
+            </div>
+            <div class="block">
+                <div class="text">Exchange maximum</div>
+                <div class="sum">2.2463 ($350.00 USD)</div>
+            </div>
+        </div>
+    </div>
+    <div class="control footer progress" *ngIf="step == 3">
+        <button class="btn btn_default" type="button">WATCH PROGRESS</button>
+        <button class="btn btn_default" type="button">EXCHCANGE AGAIN</button>
+    </div>
+</div>

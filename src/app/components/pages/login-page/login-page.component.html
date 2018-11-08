@@ -1,0 +1,13 @@
+<form name="login" class="login-page__form" #form="ngForm" (ngSubmit)="login(form)">
+    <ul class="login-page__message-box">
+        <li class="login-page__message--error" *ngFor="let message of errorMessages">{{message}}</li>
+    </ul>
+    <div class="input-field input-field--icon input-field--user">
+        <input class="input input--default" name="username" type="text" [(ngModel)]="username" placeholder="Username" autofocus minlength="3"
+            required>
+    </div>
+    <div class="input-field input-field--icon input-field--password input-field--last">
+        <input class="input input--default" name="password" type="password" [(ngModel)]="password" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn btn_access log_in login-page__button" [disabled]="loginIn">Log in</button>
+</form>

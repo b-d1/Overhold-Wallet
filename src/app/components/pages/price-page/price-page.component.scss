@@ -1,0 +1,215 @@
+.main_price {
+  // padding: 38px 15px 32px;
+  flex-grow: 2;
+
+  .price-header {
+    .wrap {
+      .info {
+        .amount {
+          .difference {
+            display: flex;
+            font-size: 0.7rem;
+            align-items: center;
+
+            div {
+              // background-color: #21b54e;
+              border-radius: 3px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            img {
+              width: 10px;
+              height: 11px;
+              margin: 7px 0 7px 7px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//TODO refactor
+
+.exchange_table{
+  width: 100%;
+  margin-top: 38px;
+  margin-bottom: 38px;
+  border-collapse: collapse;
+}
+.exchange_table thead{
+  text-align: left;
+  background: rgba(48, 56, 80, 0.3);
+}
+.exchange_table thead th{
+  padding-left: 30px;
+  position: relative;
+  height: 47px;
+  font-size: 0.75rem;
+}
+.exchange_table thead th:nth-child(1){
+  padding-left: 38px;
+}
+.exchange_table thead th:before{
+  position: absolute;
+  content: '';
+  opacity: 0.3;
+  left: 0;
+}
+.exchange_table thead th.mark_cap:before{
+  width: 13px;
+  height: 17px;
+  background: url(../../../../img/thead_item1.png) no-repeat center;
+  background-size: cover;
+  left: 17px;
+}
+.exchange_table thead th.volume:before{
+  width: 16px;
+  height: 16px;
+  background: url(../../../../img/thead_item2.png) no-repeat center;
+  background-size: cover;
+}
+.exchange_table thead th.circulating:before{
+  width: 17px;
+  height: 17px;
+  background: url(../../../../img/thead_item3.png) no-repeat center;
+  background-size: cover;
+}
+.exchange_table thead th.max_sup:before{
+  width: 17px;
+  height: 17px;
+  background: url(../../../../img/thead_item4.png) no-repeat center;
+  background-size: cover;
+}
+.exchange_table tbody tr{
+  font-family: 'SFUIText-Medium';
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.exchange_table tbody tr td:nth-child(1){
+  padding-left: 38px;
+}
+.exchange_table tbody tr:nth-child(1){
+  color: rgba(255,255,255, 1);
+}
+.exchange_table tbody tr td{
+  height: 38px;
+  vertical-align: bottom;
+}
+.exchange_table tbody tr td.col1,
+.exchange_table tbody tr td.col3{
+  width: 26%;
+}
+.exchange_table tbody tr td.col2{
+  width: 23%;
+}
+.exchange_table tbody tr td.col4{
+  width: 25%;
+}
+.exchange_table tbody tr td.converted {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.price_block{
+  height: 47px;
+  background: rgba(48, 56, 80, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+.price_block .text{
+  font-size: 0.75rem;
+}
+.price_block .wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price_block .wrap .item{
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.6rem;
+  position: relative;
+  padding-left: 20px;
+}
+.price_block .wrap .item + .item{
+  margin-left: 20px;
+}
+.price_block .wrap .item:before{
+  position: absolute;
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  top: calc(50% - 5.5px);
+  left: 0;
+}
+.price_block .wrap .item.light_blue:before{
+  background: #a3e1f7;
+}
+.price_block .wrap .item.dark_blue:before{
+  background: #3864ec;
+}
+.price_block .wrap .item.green:before{
+  background: #69b456;
+}
+.price_block .wrap .currency{
+  margin-left: 13px;
+}
+.price_block .wrap .days{
+  margin-left: 20px;
+}
+
+.content.main_price .exchange_rate_block{
+  margin: 33px 15px 15px 15px;
+}
+.price-header .wrap{
+  display: flex;
+  align-items: center;
+}
+.price-header .wrap .crypto_item{
+  margin-right: 15px;
+}
+.price-header .wrap .info{
+  font-family: 'SFUIText-Medium';
+  padding-right: 0;
+}
+.price-header .wrap .info .name{
+  font-size: 1.3rem;
+}
+.price-header .wrap .info .amount{
+  display: flex;
+  align-items: center;
+}
+.price-header .wrap .info .amount .sum{
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+.price-header .wrap .info .amount .square{
+  width: 58px;
+  height: 21px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 1.05rem;
+  position: relative;
+}
+.price-header .wrap .info .amount .square.up{
+  background: #69b456;
+}
+.price-header .wrap .info .amount .square.up:after{
+  position: absolute;
+  content: '';
+  width: 9px;
+  height: 13px;
+  right: -15px;
+  background: url(../../../../img/arrow_rate_up_green.png) no-repeat center;
+  background-size: cover;
+  top: calc(50% - 6.5px);
+}
+
+.col2, .col3, .col4 {
+  padding-left: 30px;
+}

@@ -1,0 +1,24 @@
+.button {
+  text-align: center;
+  border: solid 1px $base-border-color;
+  padding: 8px 24px;
+  background: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: .5s ease;
+  transition-property: background-color border-color;
+  &:hover {
+    background-color: $base-hover-color;
+    border-color: $base-hover-color;
+  }
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999 !important;
+  background-color: #aba5a5 !important;
+  color: #ffffff !important;
+}

@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright © 2018 Overhold Team",
+  "productName": "Overhold-Wallet",
+  "directories": {
+    "app": "dist",
+    "output": "app-builds"
+  },
+  "extraFiles": [
+    "backend"
+  ],
+  "win": {
+    "icon": "src/icons/256x256.png",
+    "target": [
+      "portable"
+    ]
+  },
+  "mac": {
+    "icon": "src/icons/256x256.png",
+    "target": [
+      "dmg"
+    ]
+  },
+  "linux": {
+    "icon": "src/icons",
+    "target": [
+      "deb"
+    ]
+  }
+}

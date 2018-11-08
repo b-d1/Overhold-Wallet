@@ -1,0 +1,63 @@
+
+<div class="right_menu" *ngIf="screen === 'username'">
+    <div class="header">
+      <div class="title">Change your username</div>
+    </div>
+    <div class="middle_block user-panel">
+      <form class="signup-form" name="settings-login">
+        <label class="form__label">Old username</label>
+        <input class="form__input" type="text" [(ngModel)]="oldUsername" name="oldUsername"> 
+        <label class="form__label">New username</label>
+        <input class="form__input" type="text" [(ngModel)]="newUsername" name="newUsername">
+        <label class="form__label">Password</label>
+        <input class="form__input" type="password" [(ngModel)]="password" name="password" required>
+        <div class="message-margin"> {{usernameMessage}}</div>
+        <button class="button" [disabled]="updateInProgress" (click)="changeUsername()">CHANGE USERNAME</button>
+      </form>
+    </div>
+  </div>
+  <div class="right_menu" *ngIf="screen === 'password'">
+    <div class="header">
+      <div class="title">Change your password</div>
+    </div>
+    <div class="middle_block user-panel">
+      <form class="signup-form" name="settings-password">
+        <label class="form__label">Old password</label>
+        <input class="form__input" type="password" [(ngModel)]="oldPassword" name="oldPassword">
+        <label class="form__label">New password</label>
+        <input class="form__input"               
+              type="password" 
+              [(ngModel)]="newPassword" 
+              name="newPassword"
+              minlength="6" 
+              maxlength="12" 
+              required>
+        <label class="form__label">Confirm new password</label>
+        <input class="form__input"               
+              type="password" 
+              [(ngModel)]="confirmNewPassword" 
+              name="confirmNewPassword"
+              minlength="6" 
+              maxlength="12" 
+              required>
+        <div class="message-margin"> {{passwordMessage}}</div>
+        <button class="button" [disabled]="updateInProgress" (click)="changePassword()">CHANGE PASSWORD</button>
+        
+      </form>
+    </div>
+  </div>
+  <div class="right_menu" *ngIf="screen === 'rate'">
+    <div class="header">
+      <div class="title">API refresh rate</div>
+    </div>
+    <div class="middle_block user-panel">
+      <select class="settings-page__select"
+              type="number"
+              [(ngModel)]="rate" 
+              name="rate">
+        <option *ngFor="let rate of rates" [ngValue]="rate.value">{{ rate.key }}</option>
+      </select>
+      <div class="message-margin"> {{rateMessage}}</div>
+      <button class="button" [disabled]="updateInProgress" (click)="changeRate()">SAVE RATE</button>
+    </div>
+  </div>  

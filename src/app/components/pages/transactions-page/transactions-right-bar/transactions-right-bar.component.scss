@@ -1,0 +1,42 @@
+.transactions-right-bar__icon {
+    margin-right: 18px;
+}
+
+.right_menu .grid_transactions .row {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    & .crypto_item {
+        margin-right: 18px;
+    }
+}
+
+.right_menu {
+    .unconfirmed-transaction {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .full-fill-row {
+        max-width: none;
+    }
+    
+    .context-menu-button {
+        background-color: unset;
+        cursor: pointer;
+    }
+}
+
+.transaction-page__row-value {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    &.type--receive-value {
+      color: #a6f7a2;
+    }
+    &.type--send-value {
+      color: #f05555;
+    }
+  }

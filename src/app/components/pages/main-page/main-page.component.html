@@ -1,0 +1,18 @@
+<div class="content main-page">
+  <div class="header">
+    <ul class="breadcrumb">
+      <li>Portfolio</li>
+    </ul>
+  </div>
+  <div class="main-page__info">
+    <div class="main-page__date">
+      {{chartDate | date: 'EEEE, d MMMM'}}
+    </div>
+    <div class="main-page__container">
+      <div class="main-page__title">TOTAL BALANCE</div>
+      <div class="main-page__amount">{{total | number | currency: currency}}</div>
+    </div>
+    <main-chart></main-chart>
+  </div>
+</div>
+<main-right-bar (notify)="changeCurrency($event)"></main-right-bar>

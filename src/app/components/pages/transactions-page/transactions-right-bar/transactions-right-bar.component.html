@@ -1,0 +1,70 @@
+<div class="right_menu">
+  <div class="header">
+    <div class="title">Information about transfer</div>
+    <button class="link"></button>
+  </div>
+  <div class="grid_transactions trans_send_info">
+    <div class="row row--transaction">
+      <div class="crypto_item {{getCoinIcon(transaction.coinName)}} {{ transaction.type }}"></div>
+      <div class="info">
+        <div class="name">{{transaction.coinName}}</div>
+      </div>
+      <div class="info unconfirmed-transaction">
+        <div class="transaction-page__row-value" [ngClass]="transaction.type && ('type--' + transaction.type + '-value')">
+          <span>{{getSign(transaction.type)}}{{transaction.realAmount}} {{coinSymbol}}</span>
+        </div>
+        <div *ngIf="!checkConfirmation(transaction.confirmations)">
+          <span class="item_status">UNCONFIRMED</span>
+        </div>
+      </div>
+    </div>
+    <div class="row row--transaction">
+      <div class="crypto_item arrow_right_blue"></div>
+      <div class="info">
+        <div class="name">{{ transaction.transactionDate | date: 'dd MMM yyyy, HH:mm' }}</div>
+        <div class="rate">{{ transformDate(transaction.transactionDate) }}</div>
+      </div>
+      <div class="info">
+        <div class="name">{{transactionValue}} USD</div>
+        <div class="rate">Current value</div>
+      </div>      
+    </div>
+    <div class="row row--transaction">
+      <div class="crypto_item arrow_right"></div>      
+      <div class="info">
+        <div class="name">{{transaction.realFees}} {{feeCoinSymbol}}</div>
+        <div class="rate">Fees</div>
+      </div>
+    </div>
+    <div class="row row--transaction">
+      <div class="info full-fill-row">
+        <div class="name break-word">{{ transaction.transactionHash }}</div>
+        <button class="btn btn_default" (click)="copyAddress()">Copy</button>
+      </div>
+    </div>
+    <div class="row row--transaction">
+      <div class="crypto_item qr_code"></div>
+      <div class="info full-fill-row">
+        <div class="name">{{transaction.from}}</div>
+        <div class="rate">From</div>
+      </div>
+    </div>
+    <div class="row row--transaction">
+      <div class="crypto_item qr_code"></div>
+      <div class="info full-fill-row">
+        <div class="name">{{transaction.to}}</div>
+        <div class="rate">To</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom_panel">
+    <div class="info">
+      <div class="name" *ngIf="transaction.type=='send'">{{transaction.from}}</div>
+      <div class="name" *ngIf="transaction.type=='receive'">{{transaction.to}}</div>
+      <div class="rate">Your {{transaction.coinName}} address</div>
+    </div>
+    <div class="info margin_left_35">
+      <button class="btn btn_default" (click)="closeInfo()">CLOSE</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="settings-page">
+  <header class="settings-page__header">
+    <h1 class="header__text" *ngIf="activeStage === 'general'">Manage {{username}}’s local settings</h1>
+    <h1 class="header__text" *ngIf="activeStage === 'coins'">Settings - Coins</h1>
+    <h1 class="header__text" *ngIf="activeStage === 'plugins'">Settings - Plugins</h1>
+    <switcher class="settings-page__switcher" [stages]="stages" [activeStage]="activeStage" (onChange)="changeScreen($event)"></switcher>
+  </header>
+  <main class="settings-page__content" *ngIf="activeStage === 'general'">
+    <virtual-scroll class="item_container">
+      <li>
+        <div class="row" [ngClass]="{'row--active':rightMenuOpen && currentScreen === 'username'}" (click)="changeSettings('username')">
+          <div class="row__content settings-page__row-content">
+            <div class="row__icon">
+              <img width="40" height="40" src="../../../../img/settings-user.svg" alt="">
+            </div>
+            <div class="settings-page__row-info">
+              <div class="row__title">Username</div>
+              <div class="row__description">Change username</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="row" [ngClass]="{'row--active':rightMenuOpen && currentScreen === 'password'}" (click)="changeSettings('password')">
+            <div class="row__content settings-page__row-content">
+              <div class="row__icon">
+                <img width="40" height="40" src="../../../../img/settings-password.svg" alt="">
+              </div>
+              <div class="settings-page__row-info">
+                <div class="row__title">Password</div>
+                <div class="row__description">Change password</div>
+              </div>
+            </div>
+          </div>
+      </li>
+      <li>
+        <div class="row" [ngClass]="{'row--active':rightMenuOpen && currentScreen === 'rate'}" (click)="changeSettings('rate')">
+            <div class="row__content settings-page__row-content">
+              <div class="row__icon">
+                <img width="40" height="40" src="../../../../img/settings-api.svg" alt="">
+              </div>
+              <div class="settings-page__row-info">
+                <div class="row__title">API refresh rate</div>
+                <div class="row__description">Rate of API refresh rate</div>
+              </div>
+              <div class="row__clearfix"></div>
+              <div class="settings-page__row-info settings-page__row-info--current">
+                <div class="row__title settings-page__row-title--current">{{getDisplayApiRefreshRate(generalSettings.refreshRate)}}</div>
+                <div class="row__description settings-page__row-discription--currents">Rate</div>
+              </div>
+            </div>
+          </div>
+      </li>
+    </virtual-scroll>    
+  </main>
+
+  <main class="settings-page__content" *ngIf="activeStage === 'coins'">
+    <virtual-scroll class="item_container">
+        <li *ngFor="let coin of coins; let i = index">
+          <div class="row">
+              <div class="row__content settings-page__row-content">
+                <div class="row__icon">
+                  <span width="40" height="40" class="{{coin.icon}} crypto_item item_icon"></span>
+                </div>
+                <div class="settings-page__row-info">
+                  <div class="row__title">{{coin.name}}</div>
+                  <div class="row__description">{{coin.symbol}}</div>
+                </div>
+                <div *ngIf="coin.updating" class="intro-update__status">UPDATING...</div>
+                <div class="row__clearfix"></div>
+                <div class="settings-page__row-info settings-page__row-info--current">
+                  <onoff-switcher [disabledValue]="coinUpdate.state" (onChange)="changeCoin($event, coin, i)" [state]="coin.state" [componentId]="i"></onoff-switcher>
+                </div>
+              </div>
+            </div>
+        </li>
+    </virtual-scroll> 
+    
+  </main>
+  <footer class="footer" >
+    <button class="button" (click)="signOut()">SIGN OUT</button>
+  </footer>
+</div>
+<settings-right-bar class="right_menu_wrap big settings-page__right-menu" 
+                    [@fade] 
+                    [screen]="currentScreen"
+                    [generalSettings]="generalSettings"
+                    (close)="closeRightMenu()"
+                    (lockRightMenuEvent)="lockRightMenuFn($event)"
+                    *ngIf="rightMenuOpen">
+</settings-right-bar>

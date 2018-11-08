@@ -1,0 +1,67 @@
+<div class="content main_price">
+  <div class="header">
+    <ul class="breadcrumb">
+      <li>Price</li>
+    </ul>
+  </div>
+  <div class="header price-header">
+    <div class="wrap">
+      <div class="crypto_item" [ngClass]="getCoinIcon(cryptoCurrency?.name)"></div>
+      <div class="info">
+        <div class="name">{{cryptoCurrency?.name}} ({{getCoinSymbol(cryptoCurrency?.name)}})</div>
+        <div class="rate">{{ date | date:'shortDate'}}</div>
+      </div>
+    </div>
+    <div class="wrap" *ngIf="allDataFetched">
+      <div class="info">
+        <div class="amount">
+          <div class="sum">{{cryptoCurrency?.info["price" + currency] }}</div>
+          <div class="difference" [ngClass]="getRateColor(cryptoCurrency?.info[time.id])">
+            <div>({{cryptoCurrency?.info[time.id]}})</div>
+            <img *ngIf="cryptoCurrency.info[time.id] > 0" src="../../../../../src/img/arrow_green.png" />
+            <img *ngIf="cryptoCurrency.info[time.id] < 0" src="../../../../../src/img/arrow_red.png" />
+          </div>
+        </div>
+        <div class="rate">{{calculateBalance()}} ({{getCoinSymbol(cryptoCurrency?.name)}})
+          <span *ngIf="calculateBalance() != 0.00000" [ngClass]="getRateColor(cryptoCurrency?.info[time.id])">({{cryptoCurrency?.info[time.id]}}%) </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="exchange_rate_block">
+    <table class="exchange_table">
+      <thead>
+        <tr>
+          <th class="mark_cap col1">Market Cap</th>
+          <th class="volume col2">Volume (24h)</th>
+          <th class="circulating col3">Circulating Supply</th>
+          <th class="max_sup col4">Max Supply</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col1">{{ getFormattedCurrency(cryptoCurrency?.info.marketCapUSD) }}</td>
+          <td class="col2">{{ getFormattedCurrency(cryptoCurrency?.info.volumeUSD24H)}}</td>
+          <td class="col3">{{getCoinSymbol(cryptoCurrency?.name)}} {{ getFormattedNumber(cryptoCurrency?.info.availableSupply)}}</td>
+          <td class="col4">{{getCoinSymbol(cryptoCurrency?.name)}} {{ getFormattedNumber(cryptoCurrency?.info.maxSupply)}} </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <div class="price_block">
+        <div class="text">Price of ({{getCoinSymbol(cryptoCurrency?.name)}}) to dollar</div>
+        <div class="wrap">
+          <div class="item dark_blue">PRICE USD</div>
+          <select class="currency" [(ngModel)]="time">
+            <option *ngFor="let period of periodNames" [ngValue]="period">{{ period.name }}</option>
+          </select>
+          <select class="currency" [(ngModel)]="currency">
+            <option *ngFor="let currency of currencyTypes">{{ currency }}</option>
+          </select>
+        </div>
+      </div>
+      <price-chart class="course_chart" id="info_graphs" [time]="time" [info]="cryptoCurrency" [currency]="cryptoCurrency?.name"></price-chart>
+    </div>
+  </div>
+</div>
+<price-right-bar (changeCrypto)="changeCrypto($event)" class="main-price__right-menu"></price-right-bar>

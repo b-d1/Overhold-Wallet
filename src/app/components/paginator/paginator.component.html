@@ -1,0 +1,5 @@
+<ul class="paging">
+    <li class="paging__item" [ngClass]="{'paging__item--active' : page === currentPage }" *ngFor="let page of pages" (click)="toPage(page)">
+        <span></span>
+    </li>
+</ul>

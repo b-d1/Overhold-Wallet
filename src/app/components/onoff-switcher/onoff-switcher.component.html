@@ -1,0 +1,7 @@
+<div class="onoffswitch">
+  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="{{'myonoffswitch' + componentId}}" [disabled]="disabledValue" [(ngModel)]="state" (change)="changeState()">
+  <label class="onoffswitch-label" for="{{'myonoffswitch' + componentId}}">
+    <span class="onoffswitch-inner"></span>
+    <span class="onoffswitch-switch"><span class="onoffswitch-inner-switch"></span></span>
+  </label>
+</div>

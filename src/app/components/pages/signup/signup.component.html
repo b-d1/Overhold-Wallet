@@ -1,0 +1,19 @@
+<div class="main_wrap">
+    <div class="signup">
+      <div class="home__column home__column--center">
+        <div class="home__logo">
+          <img src="../../../../img/logo.png" alt=""> Overhold
+        </div>
+
+        <div class="home__signup">
+          <switcher [stages]="stages" [activeStage]="stage" (onChange)="changeScreen($event)"></switcher>
+          <login class="home__form" *ngIf="stage === 'login'" (onLogin)="onChangeState($event)"></login>
+          <register class="home__form" *ngIf="stage === 'register'" (onLogin)="onChangeState($event)"></register>
+          <recovery class="home__form" *ngIf="stage === 'recovery'" (onLogin)="onChangeState($event)"></recovery>
+        </div>
+        <div>
+          <video height="0" width="0" src="animation/{{animationName}}.mp4" [loop]="animationLoop" (ended)="resetAnimation()" autoplay></video>
+        </div>
+      </div>
+    </div>
+  </div>

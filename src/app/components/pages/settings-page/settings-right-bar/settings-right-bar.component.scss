@@ -1,0 +1,60 @@
+.user-panel {
+  margin: 0 30px;
+}
+
+.form__label {
+  color: #444d60;
+  font-size: 13px;
+}
+
+.form__input {
+  background: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  height: 32px;
+  color: #FFF;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.form__input:focus {
+  border-bottom: 1px solid #FFF;
+}
+
+.settings-page__button-gap {
+  margin-right: 10px;
+}
+
+.settings-page__select {
+  box-sizing: border-box;
+  height: 28px;
+  width: 100%;
+  font-size: 0.55rem;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+  padding-right: 14px;
+  background: url('../../../../../img/triangle_down_white.png') no-repeat 95% 50%, rgba(255, 255, 255, 0.1);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.settings-page__right-menu {
+  width: 600px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  height: 100vh;
+  background: #161a25;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-margin { 
+  margin-top: 3%;
+  margin-bottom: 3%;
+}

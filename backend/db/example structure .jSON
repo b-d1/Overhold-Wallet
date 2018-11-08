@@ -1,0 +1,29 @@
+{
+    "Bitcoin": {
+
+    "Internal": {
+        "coinName": "Bitcoin",
+            "isDisabled": false,
+            "addresses": [{
+            "address": "1CaYnv3MuKRgLPJqZsNQD1XWUrW2uuQaSC",
+            "balance": 0
+        }],
+            "transactions": [],
+            "addressIndex": 1,
+            "derivationPath": "m/44'/0'/0'/0/0",
+            "balance": 0
+    },
+    "Change": {
+        "coinName": "Bitcoin",
+            "isDisabled": false,
+            "addresses": [{
+            "address": "13EQJqLnZ57BUw2GcVSXKL9fR5xNrR7kT7",
+            "balance": 0
+        }],
+            "transactions": [],
+            "addressIndex": 1,
+            "derivationPath": "m/44'/0'/0'/1/0",
+            "balance": 0
+    }
+}
+}

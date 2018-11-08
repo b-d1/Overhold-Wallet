@@ -1,0 +1,74 @@
+<div class="content adresses">
+  <div class="header">
+    <ul class="breadcrumb">
+      <li>Addresses</li>
+    </ul>
+    <div class="filters-container" [hidden]="!contentFullWidth">
+      <div class="filters">
+        <div class="crypto_item medium bd_radius-50 {{currency.icon}} currency-icon"></div>
+
+        <ng-select [items]="coinNames" [(ngModel)]="currency" (change)="onCurrencyChange()" [clearable]="false" [searchable]="false" class="custom-select coin-select"
+          bindLabel="name">
+          <ng-template ng-option-tmp let-item="item">
+            <span class="{{item.icon}} crypto_item item_icon"></span>
+            <span class="item_value dropdown_item_value">{{ item.name }}</span>
+          </ng-template>
+        </ng-select>
+       
+        <ng-select [items]="addressTypes" (change)="onAddressTypeChange()" [(ngModel)]="addressType" [clearable]="false" [searchable]="false" class="custom-select" bindLabel="type">
+        </ng-select>
+      </div>
+      <search class="search_transactions" id="search_val" placeholder="Search" [(searchText)]="searchTextValue" (onSearch)="search($event)"></search>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div *ngIf="!showAddresses" class="container">
+      <div class="alert">
+        <div class="name"> Nothing was found! </div>        
+      </div>
+    </div>
+    <virtual-scroll *ngIf="showAddresses" style="height: 100%" #scroll [items]="addresses" (change)="change($event)" (update)="scrollItems = $event" (window:resize)="updateScrollItems()">
+      <div *ngFor="let addresses of scrollItems; trackBy: trackByFn ; let id = index" class="row" (click)="openAddress(id, addresses)">
+        <div class="row__content">
+          <div class="row__icon">
+            <img width="18" height="12" src="../../../../img/chain.png" alt="">
+          </div>
+          <div class="address-page__address-info">
+            <div class="row__title">{{addresses.address}}</div>
+            <div class="row__description">No label</div> <!-- Ask what this is for -->
+          </div>
+          <div class="address-page__coin-info" *ngIf="contentFullWidth && currency.name === 'Counterparty' || currency.name === 'Omni'">
+            <div class="address-page__coin-item amount">{{addresses.balanceBTC}} BTC</div>
+            <div class="address-page__coin-item crypto_item small bit"></div>
+          </div>
+          <div class="address-page__coin-info" *ngIf="contentFullWidth">
+            <div class="address-page__coin-item amount">{{getAddressBalance(addresses)}} {{currency.symbol}}</div>
+            <div class="address-page__coin-item crypto_item small bit {{currency.icon}}"></div>
+          </div>
+          <div class="address-page__coin-info" *ngIf="contentFullWidth && currency.name === 'Counterparty'">
+            <div class="address-page__coin-item amount">{{addresses.balanceNVST}} NVST</div>
+            <div class="address-page__coin-item crypto_item small bit nvst"></div>
+          </div>
+          <div class="address-page__coin-info" *ngIf="contentFullWidth && currency.name === 'Omni'">
+            <div class="address-page__coin-item amount">{{addresses.balanceMAID}} MAID</div>
+            <div class="address-page__coin-item crypto_item small bit maid"></div>
+          </div>
+        </div>
+      </div>
+      
+    </virtual-scroll>
+  </div>
+  
+  <div class="control">
+    <button class="btn btn_default" type="button" (click)="createAddress($event)"><span *ngIf="!generatingAddress">CREATE ADDRESS</span><span *ngIf="generatingAddress">CREATING ADDRESS...</span></button>
+    <paginator [currentPage]="currentPage" [countOfPage]="countOfPages"></paginator>
+  </div>
+</div>
+<addresses-info class="address-page__right-menu" 
+                *ngIf="currentAddress" 
+                [@fade] 
+                [address]="addressToOpen"
+                [currency]="currency"
+                (close)="closeAddress()">
+</addresses-info>

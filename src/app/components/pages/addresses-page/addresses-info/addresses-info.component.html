@@ -1,0 +1,44 @@
+<div class="right_menu">
+  <div class="header">
+    <div class="title">View private code</div>
+    <button class="qr_btn" (click)="showQrCode()"></button>
+  </div>
+  <virtual-scroll class="item_container"> 
+    <div class="grid_adresses trans_send_info">
+      <div class="row row--adress">
+        <!-- Must use ngIf, because Ethereum and EthereumClassic addresses are too long and the icon is broken. -->
+        <div *ngIf="coinName !== 'Ethereum' && coinName !== 'EthereumClassic'" class="crypto_item bit {{currency.icon}}"></div>
+        <div class="info full-fill-row">
+          <div class="name">{{address.address}}</div>
+          <div class="rate">Your {{coinName}} address</div>
+        </div>
+      </div>
+
+      <div class="row row--adress">
+        <div class="crypto_item key"></div>
+        <div class="info full-fill-row private_key">
+          <div class="name break-word" *ngIf="visibleCode">{{ privateKey }}</div>
+          <div class="name" *ngIf="!visibleCode">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</div>
+          <div class="rate">Private key</div>
+        </div>
+      </div>
+
+      <div class="row--adress key-func-button">
+        <button class="btn btn_default" (click)="copyAddress()">COPY ADDRESS</button>
+        <button (click)="showPrivateKey()" class="btn btn_default" *ngIf="!visibleCode">SEE PRIVATE KEY</button>
+        <button (click)="copyPrivateKey()" class="btn btn_default" *ngIf="visibleCode">COPY PRIVATE KEY</button>
+      </div>
+      
+      <div class="address_page"></div>
+      
+    </div>
+  </virtual-scroll>
+  
+
+  <div class="bottom_panel">
+    <div class="info">
+        <button class="btn btn_default" (click)="closeInfo()">CLOSE</button>
+    </div>
+    
+  </div>
+</div>

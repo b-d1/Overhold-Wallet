@@ -1,0 +1,87 @@
+<div class="header">
+    <ul class="breadcrumb">
+        <li>Backup wallet keys</li>
+    </ul>
+</div>
+
+<div class="body">    
+    <div class="words_container" [ngClass]="{blur6: !verified}">
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">1</div>
+                <div> {{ mnemonicWords[0] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">7</div>
+                <div> {{ mnemonicWords[6] }}</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">2</div>
+                <div> {{ mnemonicWords[1] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">8</div>
+                <div> {{ mnemonicWords[7] }}</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">3</div>
+                <div> {{ mnemonicWords[2] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">9</div>
+                <div> {{ mnemonicWords[8] }}</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">4</div>
+                <div> {{ mnemonicWords[3] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">10</div>
+                <div> {{ mnemonicWords[9] }}</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">5</div>
+                <div> {{ mnemonicWords[4] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">11</div>
+                <div> {{ mnemonicWords[10] }}</div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="item_wk">
+                <div class="square_bd">6</div>
+                <div> {{ mnemonicWords[5] }}</div>
+            </div>
+            <div class="item_wk">
+                <div class="square_bd">12</div>
+                <div> {{ mnemonicWords[11] }}</div>
+            </div>
+        </div>       
+    </div> 
+    <button class="btn btn_default show" *ngIf="verified" (click)="quitMnemonic()">OKAY</button>
+        
+    <button class="btn btn_default show" *ngIf="!verified" (click)="showMnemonicPhrase()">SHOW PHRASE</button>
+    <div class="alert">
+        <div class="name attention">Write down your recovery phrase</div>
+        <div class="text">
+            This set of 12 words allows you to recover your wallet in case of loss or damage. Write or print this and store it in a safe
+            or locked
+            <br> vault! Without it you will now be able to recover your money if something goes wrong.
+        </div>
+    </div>
+</div>
+<div class="control">
+    <div class="help">
+        Overhold recommends printing two copies and placing these inside plastic bags and storing them in separate physical locations
+        in case of loss, filre or water damage.
+    </div>
+</div>

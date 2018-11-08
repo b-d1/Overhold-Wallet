@@ -1,0 +1,68 @@
+<div class="content transactions">
+  <div class="header">
+    <ul class="breadcrumb">
+      <li>Transactions</li>
+    </ul>
+    <div [hidden]="!contentFullWidth" class="filters-container">
+      <div class="filters">
+        <div class="crypto_item medium bd_radius-50 {{currentCurrency.icon}} currency-icon"></div>
+        <ng-select [items]="coinNames" (change)="onCurrencyChange()" [(ngModel)]="currentCurrency" [clearable]="false" [searchable]="false" class="custom-select coin-select"
+          bindLabel="name">
+          <ng-template ng-option-tmp let-item="item">
+            <span class="{{item.icon}} crypto_item item_icon"></span>
+            <span class="item_value dropdown_item_value">{{ item.name }}</span>
+          </ng-template>
+        </ng-select>
+
+        <ng-select [items]="transactionTypes" (change)="onTransactionTypeChange()" [(ngModel)]="transactionType" [clearable]="false" [searchable]="false" class="custom-select" bindLabel="type">
+        </ng-select>
+
+        <ng-select [items]="statusNames" (change)="onStatusChange()" [(ngModel)]="transactionStatus" [clearable]="false" [searchable]="false" class="custom-select" bindLabel="name">
+        </ng-select>
+
+        <ng-select [items]="periodNames" (change)="onPeriodChange()" [(ngModel)]="period" [clearable]="false" [searchable]="false" class="custom-select" bindLabel="name">
+        </ng-select>
+      </div>
+      <search class="search_transactions" placeholder="Search" [(searchText)]="searchTextValue" (onSearch)="search($event)"></search>
+    </div>
+  </div>
+  
+  <div class="transactions-page__content">
+    <div *ngIf="!showTransactions" class="container">
+      <div class="alert">
+        <div class="name"> Nothing was found! </div>        
+      </div>
+    </div>
+    <virtual-scroll *ngIf="showTransactions" style="height: 100%" #scroll [items]="transactions" (change)="change($event)" (update)="filterTransactions = $event" (window:resize)="updateScrollItems()">
+      <div class="row" *ngFor="let transaction of filterTransactions; let i = index" (click)="openTransaction(i, transaction)">
+        <div class="row__content">
+          <div class="row__icon crypto_item {{getCoinIcon(transaction.coinName)}} {{ transaction.type }}"></div>          
+          <div>
+            <div class="row__title">{{ transaction.transactionHash }}</div>
+            <div class="row__description">{{ transformDate(transaction.transactionDate) }}</div>
+          </div>
+          <div *ngIf="!checkConfirmation(transaction.confirmations)" class="transaction-page__status">UNCONFIRMED</div>
+          <div *ngIf="transaction.change" class="transaction-page__status">CHANGE</div>
+          <div class="row__clearfix"></div>
+          <div *ngIf="contentFullWidth" class="transaction-page__row-value" [ngClass]="transaction.type && ('type--' + transaction.type + '-value')">
+            <span *ngIf="transaction.coinName!=='Counterparty' && transaction.coinName!=='Omni'">{{getSign(transaction.type)}}{{transaction.realAmount}} {{getCoinSymbol(transaction.coinName)}}</span>
+            <span *ngIf="transaction.coinName==='Counterparty' || transaction.coinName==='Omni'">{{getSign(transaction.type)}}{{transaction.realAmount}} {{transaction.asset}}</span>
+          </div>
+        </div>
+
+      </div>
+    </virtual-scroll>
+  </div>
+  <div class="control">
+    <button class="btn btn_default" type="button" (click)="send()">SEND</button>
+    
+    <paginator [currentPage]="currentPage" [countOfPage]="countOfPages"></paginator>
+  </div>
+</div>
+<transactions-right-bar class="right_menu_wrap big transaction__right-menu" 
+                        *ngIf="showTransactionDetails" 
+                        [@fade] 
+                        [transaction]="transactionToOpen"
+                        [transactionValue]="transactionValueInUSD"
+                        (close)="closeTransaction()">>
+</transactions-right-bar>

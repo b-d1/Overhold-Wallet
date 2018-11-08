@@ -1,0 +1,20 @@
+<div class="popup backup_wk">
+    <ul class="breadcrumb">
+        <li>Your 12-word phrase</li>
+    </ul>
+    <div class="content">
+        <div class="left_column">
+            <div class="item_wk" *ngFor="let mnemonic of leftSide; let i = index">
+                <div class="square_bd">{{ i + 1 }}</div>
+                <input type="text" class="wk_name" placeholder="{{ mnemonic }}">
+            </div>
+        </div>
+        <div class="right_column">
+            <div class="item_wk" *ngFor="let mnemonic of rightSide; let i = index">
+                <div class="square_bd">{{ i + 7 }}</div>
+                <input type="text" class="wk_name" placeholder="{{ mnemonic }}">
+            </div>
+        </div>
+    </div>
+    <button class="btn btn_default p42" (click)="closePop()">OKAY</button>
+</div>

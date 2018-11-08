@@ -1,0 +1,28 @@
+<div class="right_menu">
+  <div class="header">
+    <div class="title">Capitalization</div>
+    <select class="currency" (change)="onCurrencyChange($event.target.value)">
+      <option *ngFor="let currency of currencies" [ngValue]="currency">{{ currency }}</option>
+    </select>
+    <search class="search_transactions custom_searach" placeholder="Search" (onSearch)="search($event)"></search>
+  </div>
+  <div *ngIf="!showData" class="container">
+    <div class="alert">
+      <div class="name"> Nothing was found! </div>
+    </div>
+  </div>
+  <virtual-scroll *ngIf="showData" #scroll [items]="filterCoins" class="item_container portf_page" (change)="change($event)" (update)="updateScrollItems($event)" (window:resize)="updateScrollItems()">
+    <li *ngFor="let coin of scrollItems" class="item" (click)="setCurrentCrypto(coin)">
+      <div class="crypto_item {{ getCoinIcon(coin.name) }}"></div>
+      <div class="info">
+        <div class="name">{{ coin.name }}</div>
+        <div class="rate">{{ getFormattedPrice(prices[coin.name]) }}</div>
+      </div>
+    </li>
+  </virtual-scroll>
+</div>
+<div class="control">
+  <div class="group_btns">
+  </div>
+  <paginator [currentPage]="currentPage" [countOfPage]="countOfPages"></paginator>
+</div>

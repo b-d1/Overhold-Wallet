@@ -1,0 +1,192 @@
+<div class="content transfer_money flex_column" [ngClass]="{blur6: openQRwindow}">
+  <div class="header success_header">
+    <div class="header_item" [ngClass]="{'visability-hidden': step !== 1}">
+      <div class="crypto_item medium bd_radius {{getCoinIcon(currentCurrency.name)}}"></div>
+      <ng-select [items]="coins" [(ngModel)]="currentCurrency" [clearable]="false" [searchable]="false" class="dropdown-filter type-dropdown"
+        bindLabel="name">
+        <ng-template ng-option-tmp let-item="item">
+          <span class="{{getCoinIcon(item.name)}} crypto_item item_icon dropdown_crypto_item"></span>
+          <span class="item_value dropdown_item_value">{{ item.name }}</span>
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="info">
+      <div class="amount orange">{{getCoinBalance(currentCurrency.name)}} {{getCoinSymbol(currentCurrency.name)}}</div>
+      <div class="text">Available amount to send</div>
+    </div>
+  </div>
+  <div class="transfer-container">
+    <div class="transfer-center-container">
+      <div *ngIf="step == 1" class="middle_block">
+        <div class="form_wrap adress transfer__address">
+          <div class="text__label">To</div>
+          <div class="input-container">
+            <div class="sign-button"></div>
+            <input [(ngModel)]="address" type="text" class="form adress" placeholder="{{currentCurrency.name}} address">
+            <!-- <button class="photo-button" (click)="toggleQRWindow()"></button> -->
+          </div>
+        </div>
+        <div class="form_wrap amount">
+          <div class="text__label">Amount</div>
+          <div class="input-container">
+            <div class="coin-button"></div>
+            <input [(ngModel)]="amount" type="number" step="0.1" class="form number-input" placeholder="0.0" min="0">
+            <select class="currency coin-dropdown dropdown-filter">
+              <option [selected]="coin.name == currentCurrency.name" *ngFor="let coin of coins" [ngValue]="coin.name">{{ getCoinSymbol(coin.name)}}</option>
+            </select>
+          </div>
+        </div>
+        <button (click)="nextStep()" class="next"></button>
+        <div [ngClass]="{'fadeInDown animated' : amount != null && address != null, 'invis' : amount == null || address == null}"
+          class="sending_amount">
+          <div class="send_header">Send ${{amount ? convertToUSD(amount) : 0}} USD?</div>
+          Are you sure you want to send
+          <span class="orange">{{amount}} {{getCoinSymbol(currentCurrency.name)}} (${{amount ? convertToUSD(amount): 0}} USD</span>) to {{address}}?
+        </div>
+
+        <div *ngIf="invalidReceiverAddress || receiverAddressNotPresent">
+          Please enter valid receiver address.
+        </div>
+
+        <div *ngIf="invalidBalance">
+          Please enter amount that is less than your current balance.
+        </div>
+
+
+        <div *ngIf="amountNotPresent">
+          Please enter amount for the transaction.
+        </div>
+
+        <div *ngIf="noAddressesWithRequiredBalance">
+          There is no address in your wallet that contains enough balance for the desired transaction.
+          <span *ngIf="addressWithMaxBalance">The maximum available balance in single address is: {{addressWithMaxBalance[sharedService.getCoinBalanceString(currentCurrency.name)]}}, from address {{addressWithMaxBalance.address}}</span>
+        </div>
+
+      </div>
+      <div *ngIf="step == 3">
+        <div class="animation_block success-video-mask">
+          <!--<video src="animation/success.mp4" class="success_anim" autoplay (ended)="onTransactionEnded()"></video>-->
+          <video src="animation/success.mp4" class="success_anim" autoplay></video>
+        </div>
+        <div class="middle_block">
+          <div class="alert fadeInDown animated speed700">
+            <div class="name">Success</div>
+            <div (click)="openTransactionInExplorer()" class="text" *ngIf="!offlineTransaction">Transaction sent successfully.
+              <br />
+              <span class="txid">{{transactionId}}</span>
+            </div>
+            <div class="text" *ngIf="offlineTransaction">Transaction added to the queue successfully.
+              <br />It will be broadcasted once internet connection is available.</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="step === 4" class="middle_block">
+        <div class="alert fadeInDown animated speed700">
+          <div class="text">Please select address to send from</div>
+          <div *ngFor="let addressBalance of validAddresses">
+          <label>
+            <input type="radio" name="address" [(ngModel)]="addressFrom" [value]="addressBalance">
+            <span *ngIf="currentCurrency.name !== 'Counterparty' && currentCurrency.name !== 'Overhold' && currentCurrency.name !== 'Omni' && currentCurrency.name !== 'Maid'">Address: {{addressBalance.address}}, Balance: {{addressBalance.balance}} {{getCoinSymbol(currentCurrency.name)}}</span>
+            <span *ngIf="currentCurrency.name === 'Counterparty'">Address: {{addressBalance.address}}, XCP Balance: {{addressBalance.balanceXCP}}, Bitcoin Balance: {{addressBalance.balanceBTC}}</span>
+            <span *ngIf="currentCurrency.name === 'Overhold'">Address: {{addressBalance.address}}, NVST Balance: {{addressBalance.balanceNVST}}, Bitcoin Balance: {{addressBalance.balanceBTC}}</span>
+            <span *ngIf="currentCurrency.name === 'Omni'">Address: {{addressBalance.address}}, OMNI Balance: {{addressBalance.balanceOMNI}}, Bitcoin Balance: {{addressBalance.balanceBTC}}</span>
+            <span *ngIf="currentCurrency.name === 'Maid'">Address: {{addressBalance.address}}, MAID Balance: {{addressBalance.balanceMAID}}, Bitcoin Balance: {{addressBalance.balanceBTC}}</span>
+          </label>
+          </div>
+          <button (click)="nextStep()" class="next"></button>
+        </div>
+      </div>
+      <div *ngIf="step === 5" class="middle_block">
+        <div class="alert fadeInDown animated speed700">
+          <div class="text">No address with the required balance, please try again.</div>
+        </div>
+      </div>
+      <div *ngIf="step === 6" class="middle_block">
+        <div class="alert fadeInDown animated speed700">
+          <div class="send_header">Send {{amount ? amount : 0}} {{getCoinSymbol(currentCurrency.name)}}</div>
+          Are you sure you want to send
+          <span class="orange">{{amount}} {{getCoinSymbol(currentCurrency.name)}} (${{amount ? convertToUSD(amount) : 0}} USD</span>) to {{address}} with fees: {{getCoinMiningFees(currentCurrency.name)}} {{getCoinFeeLabel(currentCurrency.name)}}
+          <span *ngIf="!isCoinBitcoinBased()" >({{convertCurrencyToUSD()}} USD)?</span>
+          <div class="group_btns">
+            <button class="btn btn_default" type="button" (click)="sendTransaction($event)">SEND</button>
+            <button class="btn btn_default" type="button" (click)="cancel()">CANCEL</button>
+          </div>
+          <div class="fadeInDown animated speed700" *ngIf="sendingTransaction">
+            <div class="name">Sending transaction...</div>
+            <div class="text" *ngIf="!offlineTransaction">Please wait for a few seconds, the transaction is being broadcasted to the network.</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="step == 7">
+        <div class="animation_block success-video-mask">
+          <video src="animation/incorrect.mp4" class="incorrect_anim" autoplay></video>
+        </div>
+        <div *ngIf="step == 7" class="middle_block">
+          <div class="alert fadeInDown animated speed700">
+            <div class="name">An error occurred<span *ngIf="transactionError">: {{transactionError}}</span></div>
+            <div class="text" *ngIf="!offlineTransaction">There was an error while sending the transaction. Please try again later.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stages transfer">
+      <div [ngClass]="{'active': step == 1}" class="sign_send stage_item"></div>
+      <div [ngClass]="{'active': step == 2}" class="sign_pin stage_item"></div>
+      <div [ngClass]="{'active': step == 3}" class="sign_complete stage_item"></div>
+    </div>
+  </div>
+  <div class="control">
+    <div class="fee_block left" [ngClass]="{'visability-hidden': step !== 1}">
+      <div class="fee">
+        <div class="text">Transaction speed</div> <br>
+        <div [ngClass]="{'slow_speed': speed === 1, 'medium_speed': speed === 2, 'fast_speed': speed === 3, 'visibility-hidden': step !== 1}"
+          class="mining_speed">
+          <input [(ngModel)]="speed" type="range" min="1" max="3" step="1">
+          <span *ngIf="speed == 1">Slow</span>
+          <span *ngIf="speed == 2">Average</span>
+          <span *ngIf="speed == 3">Fast</span>
+        </div>
+      </div>
+    </div>
+    <!-- <div [ngClass]="{'slow_speed': speed === 1, 'medium_speed': speed === 2, 'fast_speed': speed === 3, 'visability-hidden': step !== 1}"
+      class="mining_speed">
+      <input [(ngModel)]="speed" type="range" min="1" max="3" step="1">
+      <span *ngIf="speed == 1">Slow</span>
+      <span *ngIf="speed == 2">Average</span>
+      <span *ngIf="speed == 3">Fast</span>
+    </div> -->
+    <div [ngClass]="{'visability-hidden': step !== 1}" class="fee_block right">
+      <div class="fee">
+        <div class="text">Network mining fee</div>
+        <!--<div class="sum">{{amount ? (getAmount(amount, false) * (1 + (speed / 10))).toFixed(4) : 0}} BTC ({{amount ? (getAmount(amount, true) * (1 + (speed / 10))).toFixed(2) : 0}} USD)</div>-->
+        <div class="sum" *ngIf="isCoinEthereumBased()">
+          <span>{{getCoinMiningFees(currentCurrency.name)}} GWEI ({{convertCurrencyToUSD()}} USD)</span>
+        </div>
+
+        <div class="sum" *ngIf="isCoinBitcoinBased()">
+          <span>{{getCoinMiningFees(currentCurrency.name)}} SpB (Undefined)</span>
+        </div>
+
+        <div class="sum" *ngIf="notBitcoinOrEthereumBasedCoin()">
+          <span>{{getCoinMiningFees(currentCurrency.name)}} {{getCoinSymbol(currentCurrency.name)}} ({{convertCurrencyToUSD()}} USD)</span>
+        </div>
+      </div>
+      <div class="crypto_item" [ngClass]="{'slow': speed == 1, 'average': speed == 2, 'rocket': speed == 3}"></div>
+    </div>
+  </div>
+
+</div>
+<div class="transfer__qr-window" *ngIf="openQRwindow">
+  <div class="transfer__qr-container">
+    <div class="transfer__qr-image">
+      <img src="../../../../img/qr_thumb.png" width="490" height="320" alt="">
+    </div>
+    <h2 class="transfer__qr-title">Scan qr code with your computer camera</h2>
+    <p class="transfer__qr-description">
+      IAt vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+      quos dolores et quas molestias
+    </p>
+    <button class="btn btn_default transfer__qr-close" (click)="toggleQRWindow()">CLOSE QR</button>
+  </div>
+</div>

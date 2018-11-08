@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+
+    &.alternative-background {
+        background: url(../../../img/blur_bg3.jpg);
+        background-size: cover;
+    }
+}
+
+.page {
+    display: flex;
+    height: 100vh;
+    flex-grow: 2;
+}

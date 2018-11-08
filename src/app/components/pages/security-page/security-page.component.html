@@ -1,0 +1,17 @@
+<div class="content setup_pin w53">
+    <div class="animation_block video-mask">
+        <video class="loading_anim " src="animation/incorrect.mp4" #video></video>
+    </div>
+    <div class="message alert padding-top">{{ pinMessage }}</div>
+    <div class="control">
+        <div class="help">
+            Don't show this password to anyone, you'll need it to complete all operations in the app.
+        </div>
+    </div>
+</div>
+<div class="right_menu_wrap flex_column big">
+    <div class="right_menu sp_pin_right">
+    <button class="btn btn_default btn_close_security" (click)="onClose()">CANCEL</button>
+    </div>
+</div>
+<div class="control_security"><div class="back" (click)="onClose()"></div></div>

@@ -1,0 +1,148 @@
+// Message queue messages
+let events = {
+  chartInfoSet: "chartInfoSet",
+  cryptoInfoSet: "cryptoInfoSet",
+  cryptoPricesSet: "cryptoPricesSet",
+  cryptoMiningFeesSet: "cryptoMiningFeesSet",
+  cryptoAddressesGenerated: "cryptoAddressesGenerated",
+  cryptoPreviousAddressesGenerated: "cryptoPreviousAddressesGenerated",
+  cryptoBalancesSet: "cryptoBalancesSet",
+  cryptoTransactionsSet: "cryptoTransactionsSet",
+  generateAddress: "generateAddress",
+  generateChangeAddress: "generateChangeAddress",
+  initUser: "initUser",
+  userDBFound: "userDBFound",
+  balancesSet: "balancesSet",
+  transactionsSet: "transactionsSet",
+  rippleTransactionsSet: "rippleTransactionsSet",
+  rippleMiningFeesSet: "rippleMiningFeesSet",
+  rippleBalancesSet: "rippleBalancesSet",
+  closeConnection: "closeConnection",
+  addressGenerated: "addressGenerated",
+  addressNotGenerated: "addressNotGenerated",
+  changeAddressGenerated: "changeAddressGenerated",
+  makeTransaction: "makeTransaction",
+  transactionSent: "transactionSent",
+  transactionFailed: "transactionFailed",
+  generalSettingsUpdate: "generalSettingsUpdate",
+  generalSettingsUpdateSuccess: "generalSettingsUpdateSuccess",
+  coinsSettingsUpdate: "coinsSettingsUpdate",
+  coinsSettingsUpdateSuccess: "coinsSettingsUpdateSuccess",
+  sharedSettingsUpdate: "sharedSettingsUpdate",
+  sharedSettingsUpdateSuccess: "sharedSettingsUpdateSuccess",
+  signUpUser: "signUpUser",
+  signInUser: "signInUser",
+  logoutUser: "logoutUser",
+  getPrivateKey: "getPrivateKey",
+  privateKeyFound: "privateKeyFound",
+  privateKeyNotFound: "privateKeyNotFound",
+  getPin: "getPin",
+  setPin: "setPin",
+  changePin: "changePin",
+  validatePin: "validatePin",
+  recoverFromMnemonic: "recoverFromMnemonic",
+  getMnemonic: "getMnemonic",
+  changeUsername: "changeUsername",
+  changePassword: "changePassword",
+  pinObtained: "pinObtained",
+  pinObtainingError: "pinObtainingError",
+  getUsername: "getUsername"
+};
+
+let generalErrors = {
+  invalidDbNumber: "Invalid database number!",
+  invalidSeed: "Invalid seed!",
+  invalidNumberAddresses: "invalid Number Addresses!",
+  invalidAddressIndex: "invalid Address Index!",
+  invalidInput: "invalid Input!",
+  invalidMnemonic: "Invalid mnemonic!",
+  invalidSecretKey: "Invalid secret key!",
+  invalidSatoshi: "Invalid satoshi value!",
+  invalidWei: "Invalid wei value!",
+  invalidEther: "Invalid ether value!",
+  invalidGWei: "Invalid gwei value!",
+  invalidHex: "Invalid hex value!",
+  invalidAmount: "Invalid amount value!",
+  invalidWaves: "Invalid waves value!",
+  invalidWavelets: "Invalid wavelets value!",
+  invalidDrops: "Invalid drops value!",
+  invalidXRP: "Invalid XRP value!",
+  invalidFailover: "Invalid failover value!",
+  invalidArray: "Provided value is not valid array!",
+  invalidTransactionFeeCalculation:
+    "Invalid transaction fee calculation! Fee cannot be negative.",
+  clientNotProvided: "Client not provided!",
+  oldTransactionsNotProvided: "Old transactions not provided or invalid!",
+  transactionsNotProvided: "Transactions not provided or invalid!",
+  rippleTransactionsNotProvided: "Ripple transactions not provided or invalid!",
+  transactionItemNotProvided: "Transaction item not provided or invalid!",
+  transactionItemInputsNotProvided:
+    "Transaction item's inputs property not provided or invalid!",
+  transactionItemOutNotProvided:
+    "Transaction item's out property not provided or invalid!",
+  rippleObjNotProvidedOrInvalid: "Ripple object not provided or invalid!",
+  rippleObjBalanceNotProvidedOrInvalid:
+    "Ripple object's balance property not provided or invalid!",
+  rippleObjAddressesNotProvidedOrInvalid:
+    "Ripple object's addresses property not provided or invalid!",
+  internalError: "Internal error while processing.",
+  requestError: "The Request failed: ",
+    privateKeyError: "Error while obtaining address private key!"
+};
+
+let transactionErrors = {
+  apiNotAvailable: "The API is currently not available.",
+  sendingAddressPrivateKeyError:
+    "Error while obtaining sending address(es) private key.",
+  transactionSigningError: "Error while signing transaction.",
+  transactionBroadcastError: "Error while broadcasting transaction.",
+  notEnoughBalance: "Not enough balance for the transaction.",
+  notEnoughBitcoinFeeBalance:
+    "Not enough Bitcoin balance to cover the selected transaction fees.",
+  counterpartyTransactionCreationError:
+    "Error while obtaining Counterparty unsigned transaction.",
+  inputsError: "Error while obtaining transaction inputs",
+  outputsError: "Error while obtaining transaction outputs",
+  utxosProcessingError: "Error while processing transaction UTXOs.",
+  cryptoNetworkError: "Error while obtaining crypto network."
+};
+
+let userAuthSettingsErrors = {
+  confirmPasswordError: "Passwords don't match.",
+  createUserError: "Error creating user in database!",
+  usernameInvalidError: "Invalid username.",
+  usernameExistsError: "Username already in use. Try with another one!",
+  usernameNotFoundError: "Username was not found in the database.",
+  userNotFoundError: "User was not found in the database",
+  usernameUpdateError: "Update username error!",
+  usernameUpdateSignInError: "Sign in while changing username error!",
+  passwordUpdateSignInError: "Sign in while changing password error!",
+  passwordUpdateError: "Update password error!",
+  weakPasswordError: "Your password must be at least 6 characters long.",
+  invalidPasswordError: "Invalid password.",
+  invalidOldUsernameError: "Invalid old username.",
+  userRegisterError: "User register error!",
+  userLoginError: "User login error!",
+  userLogoutError: "Logout user error!",
+  mnemonicNotFoundError: "Mnemonic does not exist!",
+  getMnemonicError: "Get user mnemonic error!",
+  savePinError: "Save pin error!",
+  getPinError: "Obtaining user pin error!",
+  incorrectPinError: "Pin not correct!",
+  newPinSaveError: "Error saving new pin",
+  newPasswordSaveError: "Error saving new password.",
+  newUsernameSaveError: "Error saving new username.",
+  getDocumentError: "Error getting document.",
+  pinIsNotSet: "You don`t have any pin set! \n Please set your pin!",
+  getUsernameError: "Get username error.",
+  getPrivateDataError: "Error while obtaining private data.",
+  authenticationError: "Authentication error.",
+  unknownError: "UnknownError"
+};
+
+module.exports = {
+  events,
+  generalErrors,
+  transactionErrors,
+  userAuthSettingsErrors
+};
