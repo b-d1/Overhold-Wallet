@@ -1,21 +1,22 @@
 // We use custom path builder because we cannot use electron-api this.
 const path = require('path');
-let homeDirectory = process.env.HOME;
+let unixDir = process.env.HOME;
+let windowsDir = process.env.APPDATA;
 
 function getPath() {
 	let newPath = '';
 
 	switch (process.platform) {
 	case 'darwin':
-		newPath = path.join(`${homeDirectory}`, 'Library', 'Application Support');
+		newPath = path.join(`${unixDir}`, 'Library', 'Application Support');
 		break;
 
 	case 'linux':
-		newPath = path.join(`${homeDirectory}`, '.config');
+		newPath = path.join(`${unixDir}`, '.config');
 		break;
 
 	case 'win32':
-		newPath = path.join(`${homeDirectory}`, 'AppData');
+		newPath = windowsDir;
 		break;
 
 	default:
