@@ -1,6 +1,6 @@
 Overhold Wallet, Built using Maxim Gris Angular Electron project.
 
-The Resev  Wallet is a cryptocurrency wallet, it supports multiple cryptocurrencies and various features:
+The Overhold  Wallet is a cryptocurrency wallet, it supports multiple cryptocurrencies and various features:
 - send
 - receive
 - list transactions
@@ -30,21 +30,28 @@ You can find the application binaries as well as installation packages for each 
 
 For running the wallet in development mode, you will need to install some dependencies first. 
 
-You need to have node v8 installed (preferably 8.10 or higher).
+You need to have node v8 installed (preferably 8.10 or higher) and npm.
 You also need Python v2.7 installed on your machine.
 
 
 #### Install dependencies 
 
+##### Windows
+
 `npm i -g npm`
 
-`sudo apt-get install libpng-dev`
+`npm install -g windows-build-tools`
 
 `npm install -g typescript`
 
-For running the wallet on windows, you will need to run the following command additionaly:
+##### Linux and Mac
 
-`npm install -g windows-build-tools`
+`sudo apt-get install libpng-dev`
+
+`npm i -g npm`
+
+`npm install -g typescript`
+
 
 After having these packages installed, you should be ready for installing the wallet.
 
@@ -69,6 +76,10 @@ Instructions for running the wallet, in development mode:
 #### Wallet building instructions
 
 Firstly, you will have to build the backend using the [pkg](https://www.npmjs.com/package/pkg) npm module, for the desired platform. After that you should run `npm run electron:$OS`, where $OS is either `linux`, `windows` or `mac` (depending for which platform you're building it).
+
+### Contributions
+
+Contributions of any kind are highly appreciated. Please read our [countribution guide](https://github.com/overhold-org/Overhold-Wallet/blob/master/CONTRIBUTING.md) and our [code of conduct](https://github.com/overhold-org/Overhold-Wallet/blob/master/CODE_OF_CONDUCT.md).
 
 ### License
 
