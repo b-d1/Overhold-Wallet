@@ -1,5 +1,5 @@
 const BigNumber = require("bignumber.js");
-let WavesAPI = require("waves-api");
+let WavesAPI = require("@waves/waves-api");
 const CryptoJS = require("crypto-js");
 const errorMessages = require("../data/messages").generalErrors;
 const utils = require("../data/utils");

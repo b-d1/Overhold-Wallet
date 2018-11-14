@@ -1,4 +1,4 @@
-let WavesAPI = require('waves-api');
+let WavesAPI = require('@waves/waves-api');
 let dataUtils = require('../../data/utils');
 let templates = require('../../data/templates');
 let errorMessages = require('../../data/messages').generalErrors;
