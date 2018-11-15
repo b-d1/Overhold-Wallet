@@ -35,7 +35,7 @@
     "ripple-sign-keypairs": "^1.0.2",
     "threads": "^0.12.0",
     "uuid": "^3.3.2",
-    "@waves/waves-api": "^1.5.1",
+    "waves-api": "^0.24.2",
     "webworker-threads": "^0.7.17",
     "ws": "^6.1.0"
   },
