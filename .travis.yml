@@ -22,7 +22,8 @@ install:
   - cd backend
   - npm install
 script:
-  - echo hello
+  - npm run-script build:prod
+  - npm run-script pack
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
