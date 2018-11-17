@@ -44,23 +44,7 @@ your environment? What steps will reproduce the issue? What OS
 experience the problem? What would you expect to be the outcome? All these
 details will help people to fix any potential bugs.
 
-Example:
-
-> Short and descriptive example bug report title
->
-> A summary of the issue, the OS environment in which it occurs and possibly screenshot, video of the bug if it is appropriate. If
-> suitable, include the steps required to reproduce the bug.
->
-> 1. This is the first step
-> 2. This is the second step
-> 3. Further steps, etc.
->
-> `<url>` - a link to the screenshot/video of the bug if appropriate, or direct attachment to the issue
->
-> Any other information you want to share that is relevant to the issue being
-> reported. This might include the lines of code that you have identified as
-> causing the bug, and potential solutions (and your opinions on their
-> merits).
+For example on how to write bug report, please check the [bug report template](https://github.com/overhold-org/Overhold-Wallet/blob/master/.github/ISSUE_TEMPLATE/bug-report.md).
 
 
 <a name="features"></a>
