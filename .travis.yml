@@ -25,8 +25,7 @@ install:
   - npm install
 script:
   - cd $TRAVIS_BUILD_DIR
-  - npm run-script build:prod
-  - npm run-script pack
+  - npm run electron:linux
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
