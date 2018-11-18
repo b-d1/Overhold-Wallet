@@ -39,17 +39,23 @@
     "pree2e": "webdriver-manager update --standalone false --gecko false --quiet && npm run build:dev",
     "e2e": "protractor ./protractor.conf.js",
     "pack": "electron-builder build -wl",
-    "postinstall": "copyfiles db/dataUtils.js dist && copyfiles db/db.js dist && copyfiles db/pathBuilder.js dist"
+    "postinstall": "copyfiles db/dataUtils.js dist && copyfiles db/db.js dist && copyfiles db/pathBuilder.js dist && cp -R backend/ dist/ "
   },
   "dependencies": {
     "@types/moment": "^2.13.0",
     "bignumber.js": "^7.2.1",
+    "bchaddrjs": "^0.2.2",
     "bip39": "^2.5.0",
     "bitcoinjs-lib": "^3.3.2",
+    "bitcoinjs-lib-cash": "git://github.com/blag0j/bitcoinjs-lib-cash.git#bcash330",
     "bluebird": "^3.5.2",
     "coininfo": "^4.0.0",
+    "coinselect": "^3.1.11",
     "crypto-js": "^3.1.9-1",
+    "ethereumjs-tx": "^1.3.4",
+    "ethereumjs-wallet": "^0.6.0",
     "ethereum-address": "0.0.4",
+    "lodash": "^4.17.10",
     "fs": "0.0.1-security",
     "moment": "^2.22.2",
     "money": "^0.2.0",
@@ -63,7 +69,16 @@
     "openexchangerates-api": "0.0.5",
     "qr-encode": "^0.3.0",
     "ripple-address-codec": "^2.0.1",
-    "shelljs": "^0.8.2"
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "ripple-bip32": "0.0.3",
+    "ripple-sign-keypairs": "^1.0.2",
+    "shelljs": "^0.8.2",
+    "threads": "^0.12.0",
+    "uuid": "^3.3.2",
+    "waves-api": "^0.24.2",
+    "webworker-threads": "^0.7.16",
+    "ws": "^5.2.0"
   },
   "devDependencies": {
     "@angular/animations": "^5.2.9",

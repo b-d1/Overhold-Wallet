@@ -22,6 +22,8 @@ async function createDB() {
 
 async function getDocument(value, client) {
 
+	console.log("GETTING DATA", value, client, db);
+
 	return new Promise((resolve, reject) => {
 		db[client].findOne({'name': value}, function (err, doc) {
 			if (err) {
