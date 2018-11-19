@@ -3,7 +3,8 @@ import * as path from 'path';
 let cmd = require('node-cmd');
 
 
-const db = require('./db/db.js');
+const db = require('../backend/db/db.js');
+const backend = require('../backend/controllers/main.js');
 const dataUtils = require('./db/dataUtils.js');
 const ipc = require('node-ipc');
 let sender;
@@ -115,15 +116,15 @@ const createWindow = () => {
 const setIPC = () => {
 
     ipcMain.on('reloadDB', (event) => {
-        db.createDBsPromise().then(result => {
+        // db.createDBsPromise().then(result => {
             event.sender.send('DBReloaded', 'true')
-        });
+        // });
     });
 
     ipcMain.on('setupClient', (event, arg) => {
-        db.createDBsPromise().then(result => {
+        // db.createDBsPromise().then(result => {
             event.sender.send('clientSet', 'true')
-        });
+        // });
     });
 
     ipcMain.on('readPublicData', (event, arg) => {
@@ -254,7 +255,14 @@ app.on('activate', () => {
     }
 });
 app.on('ready', () => {
-    createWindow();
-    setIPC();
-    setMessaging();
+
+
+    db.createDB().then(res => {
+        console.log("STARTING BACKEND");
+        backend.start();
+        createWindow();
+        setIPC();
+        setMessaging();
+    });
+
 });
