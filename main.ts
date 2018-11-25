@@ -3,8 +3,8 @@ import * as path from 'path';
 let cmd = require('node-cmd');
 
 
-const db = require('../backend/db/db.js');
-const backend = require('../backend/controllers/main.js');
+const db = require('./backend/db/db.js');
+const backend = require('./backend/controllers/main.js');
 const dataUtils = require('./db/dataUtils.js');
 const ipc = require('node-ipc');
 let sender;
@@ -12,38 +12,6 @@ let sender;
 
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
-
-const startBackend = () => {
-
-    let parentDir = path.dirname(path.dirname(app.getAppPath()));
-    let backendDir  = path.join(parentDir, 'backend');
-    let executable = 'OverholdWalletBackend';
-
-    if(process.platform === 'win32') {
-            let backendDirPath = path.join(backendDir, '/OverholdWalletBackend.exe');
-            console.log("BACKEND PROCESS PATH", backendDirPath);
-            cmd.run(`${backendDirPath}`);
-     }
-
-    if(process.platform === 'linux'){
-        cmd.get(`
-            cd ${backendDir}/
-            ./${executable}
-            `, (err, cmdData, stderr) => {
-            console.log("BACKEND PROCESS ERROR", err);
-        });
-    }
-    
-    if(process.platform === 'darwin'){
-        cmd.get(`
-            cd ${backendDir}/
-            ./${executable}
-            `, (err, cmdData, stderr) => {
-            console.log("BACKEND PROCESS ERROR", err);
-        });
-    }
-
-};
 
 const createMenu = () => {
     const template = [
@@ -105,10 +73,6 @@ const createWindow = () => {
     win.on('closed', () => { win = null });
 
     createMenu();
-
-    if (!serve) {
-        startBackend();
-    }
 
 };
 
@@ -258,7 +222,6 @@ app.on('ready', () => {
 
 
     db.createDB().then(res => {
-        console.log("STARTING BACKEND");
         backend.start();
         createWindow();
         setIPC();

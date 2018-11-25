@@ -61,12 +61,10 @@ async function getData() {
 // We use this method getting data for resolve issue with async store/load data.
 // Probably we should resolve this issue using another way during refactor process.
 
-function start(dbObj) {
-    db.db = dbObj;
+function start() {
     getData();
     messagingService.setDataObtainingFns(getPublicData, getPrivateData);
     messagingService.setupMessaging();
-    console.log("DB OBJECT SET BACKEND");
 }
 
 module.exports = {
