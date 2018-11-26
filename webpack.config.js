@@ -119,6 +119,15 @@ function getPlugins() {
     }
   }]));
 
+    plugins.push(new CopyWebpackPlugin([{
+        "context": "",
+        "to": "",
+        "from": {
+            "glob": "backend/**/*",
+            "dot": true
+        }
+    }]));
+
   plugins.push(new ProgressPlugin());
 
   plugins.push(new CircularDependencyPlugin({

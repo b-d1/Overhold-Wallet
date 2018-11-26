@@ -5,9 +5,6 @@
     "app": "dist",
     "output": "app-builds"
   },
-  "extraFiles": [
-    "backend"
-  ],
   "win": {
     "icon": "src/icons/256x256.png",
     "target": [
