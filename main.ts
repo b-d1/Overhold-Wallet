@@ -1,11 +1,10 @@
 import { app, BrowserWindow, ipcMain, Menu, session, dialog} from 'electron';
-import * as path from 'path';
 let cmd = require('node-cmd');
 
 
 const db = require('./backend/db/db.js');
 const backend = require('./backend/controllers/main.js');
-const dataUtils = require('./db/dataUtils.js');
+const dataUtils = require('./backend/data/utils.js');
 const ipc = require('node-ipc');
 let sender;
 
@@ -53,7 +52,7 @@ const createWindow = () => {
 
     win.loadURL(`file://${__dirname}/index.html`);
 
-    // Open the DevTools.
+
     if (serve) {
         win.webContents.openDevTools();
     }
@@ -80,20 +79,15 @@ const createWindow = () => {
 const setIPC = () => {
 
     ipcMain.on('reloadDB', (event) => {
-        // db.createDBsPromise().then(result => {
             event.sender.send('DBReloaded', 'true')
-        // });
     });
 
     ipcMain.on('setupClient', (event, arg) => {
-        // db.createDBsPromise().then(result => {
             event.sender.send('clientSet', 'true')
-        // });
     });
 
     ipcMain.on('readPublicData', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.global).then(result => {
-            // console.log("DOC READ PUBLIC", result);
             event.sender.send('publicDataRead', [arg, result])
         });
     });
@@ -106,16 +100,15 @@ const setIPC = () => {
             event.sender.send('currentUserRead', [arg, resultObj])
         });
     });
-    //
+
     ipcMain.on('readSettings', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.user).then(result => {
             event.sender.send('settingsRead', [arg, result])
         });
     });
-    //
+
     ipcMain.on('readPrivateData', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.user).then(result => {
-            // console.log("DOC READ PRIVATE", result);
             event.sender.send('privateDataRead', [arg, result])
         });
 
