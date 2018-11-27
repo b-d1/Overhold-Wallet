@@ -28,7 +28,7 @@ export class ExchangePageComponent implements OnInit {
     { name: "DOGE" },
     { name: "XRP" },
     { name: "DASH" },
-    { name: "WAVE" },
+    { name: "WAVES" },
     { name: "XCP" },
     { name: "NVST" },
     { name: "OMNI" },

@@ -29,16 +29,14 @@
               type="password" 
               [(ngModel)]="newPassword" 
               name="newPassword"
-              minlength="6" 
-              maxlength="12" 
+              minlength="6"
               required>
         <label class="form__label">Confirm new password</label>
         <input class="form__input"               
               type="password" 
               [(ngModel)]="confirmNewPassword" 
               name="confirmNewPassword"
-              minlength="6" 
-              maxlength="12" 
+              minlength="6"
               required>
         <div class="message-margin"> {{passwordMessage}}</div>
         <button class="button" [disabled]="updateInProgress" (click)="changePassword()">CHANGE PASSWORD</button>

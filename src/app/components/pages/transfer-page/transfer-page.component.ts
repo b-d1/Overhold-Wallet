@@ -54,7 +54,6 @@ export class TransferPageComponent implements OnInit, OnDestroy {
     openQRwindow: Boolean = false;
     coins: global.ICoin[] = global.coins2;
     currentCurrency = this.coins[0];
-
     private subscription: Subscription;
     private publicCryptoData: Subscription;
     private privateDataSubscription: Subscription;

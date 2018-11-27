@@ -59,7 +59,7 @@
         <li *ngFor="let coin of coins; let i = index">
           <div class="row">
               <div class="row__content settings-page__row-content">
-                <div class="row__icon">
+                <div class="row__icon" [ngClass]="{'row__icon__reduced__opacity': coin.state===false}">
                   <span width="40" height="40" class="{{coin.icon}} crypto_item item_icon"></span>
                 </div>
                 <div class="settings-page__row-info">

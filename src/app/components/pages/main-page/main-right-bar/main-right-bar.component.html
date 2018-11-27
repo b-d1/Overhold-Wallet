@@ -16,7 +16,7 @@
       <div class="crypto_item {{ getCoinIcon(coin.name) }}"></div>
       <div class="info">
         <div class="name">{{ coin.name }}</div>
-        <div class="rate">{{ getFormattedPrice(prices[coin.name])}}</div>
+        <div class="rate">{{ getFormattedTotalAmount(prices[coin.name], getCoinBalance(coin.name) )}}</div>
       </div>
       <div class="amount">{{ getCoinBalance(coin.name) }} {{ getCoinSymbol(coin.name) }}</div>
       <div class="crypto_circle {{ getCoinColor(coin.name) }}"></div>
@@ -46,7 +46,7 @@
             <span>{{currentViewCoin.name}}</span>
             <img src="../../../../../../src/img/arrow_rate_up_green.png" />
           </div>
-          <div class="rate">{{prices[currentViewCoin.name]}}</div>
+          <div class="rate">{{ getFormattedTotalAmount(prices[currentViewCoin.name], getCoinBalance(currentViewCoin.name) )}}</div>
         </div>
         <div class="amount">{{getCoinBalance(currentViewCoin.name)}} {{getCoinSymbol(currentViewCoin.name)}}</div>
         <div class="crypto_circle {{getCoinColor(currentViewCoin.name)}}"></div>

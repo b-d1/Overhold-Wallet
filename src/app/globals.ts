@@ -186,7 +186,7 @@ export const coinsEnum = {
     },
     Waves: {
         name: 'Waves',
-        symbol: 'WAVE',
+        symbol: 'WAVES',
         color: 'waves',
         icon: 'waves'
     }

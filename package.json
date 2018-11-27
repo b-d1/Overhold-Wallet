@@ -1,6 +1,6 @@
 {
-  "name": "Overhold-wallet",
-  "version": "1.0.1",
+  "name": "Overhold",
+  "version": "1.1.0",
   "description": "Overhold multicurrency wallet",
   "homepage": "https://overhold.org",
   "author": {
@@ -94,8 +94,6 @@
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/router": "5.2.9",
     "@ng-select/ng-select": "^0.30.0",
-    "@ngx-translate/core": "9.1.1",
-    "@ngx-translate/http-loader": "2.0.1",
     "@types/bluebird": "3.5.20",
     "@types/core-js": "0.9.36",
     "@types/crypto-js": "^3.1.35",

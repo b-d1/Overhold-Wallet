@@ -32,7 +32,7 @@
             <div class="coin-button"></div>
             <input [(ngModel)]="amount" type="number" step="0.1" class="form number-input" placeholder="0.0" min="0">
             <select class="currency coin-dropdown dropdown-filter">
-              <option [selected]="coin.name == currentCurrency.name" *ngFor="let coin of coins" [ngValue]="coin.name">{{ getCoinSymbol(coin.name)}}</option>
+              <option [ngValue]="currentCurrency.name">{{ getCoinSymbol(currentCurrency.name)}}</option>
             </select>
           </div>
         </div>

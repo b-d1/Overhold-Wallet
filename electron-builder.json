@@ -1,6 +1,6 @@
 {
   "copyright": "Copyright © 2018 Overhold Team",
-  "productName": "Overhold-Wallet",
+  "productName": "Overhold",
   "directories": {
     "app": "dist",
     "output": "app-builds"

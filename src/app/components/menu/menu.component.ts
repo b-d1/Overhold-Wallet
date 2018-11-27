@@ -34,9 +34,4 @@ export class MenuComponent {
 		this.location.back();
 	}
 
-    signOut() {
-        this.authService.logout();
-        this.router.navigate(['/signup']);
-    }
-
 }
