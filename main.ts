@@ -1,48 +1,16 @@
 import { app, BrowserWindow, ipcMain, Menu, session, dialog} from 'electron';
-import * as path from 'path';
 let cmd = require('node-cmd');
 
 
-const db = require('./db/db.js');
-const dataUtils = require('./db/dataUtils.js');
+const db = require('./backend/db/db.js');
+const backend = require('./backend/controllers/main.js');
+const dataUtils = require('./backend/data/utils.js');
 const ipc = require('node-ipc');
 let sender;
 
 
 const args = process.argv.slice(1);
 const serve = args.some(val => val === '--serve');
-
-const startBackend = () => {
-
-    let parentDir = path.dirname(path.dirname(app.getAppPath()));
-    let backendDir  = path.join(parentDir, 'backend');
-    let executable = 'OverholdWalletBackend';
-
-    if(process.platform === 'win32') {
-            let backendDirPath = path.join(backendDir, '/OverholdWalletBackend.exe');
-            console.log("BACKEND PROCESS PATH", backendDirPath);
-            cmd.run(`${backendDirPath}`);
-     }
-
-    if(process.platform === 'linux'){
-        cmd.get(`
-            cd ${backendDir}/
-            ./${executable}
-            `, (err, cmdData, stderr) => {
-            console.log("BACKEND PROCESS ERROR", err);
-        });
-    }
-    
-    if(process.platform === 'darwin'){
-        cmd.get(`
-            cd ${backendDir}/
-            ./${executable}
-            `, (err, cmdData, stderr) => {
-            console.log("BACKEND PROCESS ERROR", err);
-        });
-    }
-
-};
 
 const createMenu = () => {
     const template = [
@@ -84,7 +52,7 @@ const createWindow = () => {
 
     win.loadURL(`file://${__dirname}/index.html`);
 
-    // Open the DevTools.
+
     if (serve) {
         win.webContents.openDevTools();
     }
@@ -105,30 +73,21 @@ const createWindow = () => {
 
     createMenu();
 
-    if (!serve) {
-        startBackend();
-    }
-
 };
 
 
 const setIPC = () => {
 
     ipcMain.on('reloadDB', (event) => {
-        db.createDBsPromise().then(result => {
             event.sender.send('DBReloaded', 'true')
-        });
     });
 
     ipcMain.on('setupClient', (event, arg) => {
-        db.createDBsPromise().then(result => {
             event.sender.send('clientSet', 'true')
-        });
     });
 
     ipcMain.on('readPublicData', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.global).then(result => {
-            // console.log("DOC READ PUBLIC", result);
             event.sender.send('publicDataRead', [arg, result])
         });
     });
@@ -141,16 +100,15 @@ const setIPC = () => {
             event.sender.send('currentUserRead', [arg, resultObj])
         });
     });
-    //
+
     ipcMain.on('readSettings', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.user).then(result => {
             event.sender.send('settingsRead', [arg, result])
         });
     });
-    //
+
     ipcMain.on('readPrivateData', (event, arg) => {
         db.getDocument(arg, dataUtils.dbNames.user).then(result => {
-            // console.log("DOC READ PRIVATE", result);
             event.sender.send('privateDataRead', [arg, result])
         });
 
@@ -254,7 +212,13 @@ app.on('activate', () => {
     }
 });
 app.on('ready', () => {
-    createWindow();
-    setIPC();
-    setMessaging();
+
+
+    db.createDB().then(res => {
+        backend.start();
+        createWindow();
+        setIPC();
+        setMessaging();
+    });
+
 });
