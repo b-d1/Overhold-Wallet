@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     stage: string = this.stages[0].type;
 
     animations = {
-        default: 'signup',
+        default: 'success',
         success: 'success',
         error: 'incorrect'
     };

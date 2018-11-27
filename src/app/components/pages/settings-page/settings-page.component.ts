@@ -181,7 +181,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
 
             if (coin.name === coinsEnum.Omni.name && state === false) {
                 this.coinsSettings[coinsEnum.Maid.name] = state;
-                this.coins[7].state = state;
+                this.coins[8].state = state;
             }
             else if (coin.name === coinsEnum.Maid.name && state === true) {
                 this.coinsSettings[coinsEnum.Omni.name] = state;
