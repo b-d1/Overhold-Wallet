@@ -60,8 +60,6 @@ After having these packages installed, you should be ready for installing the wa
 1. Create a new directory on your machine and ` cd <directory-name> `
 2. `git clone https://github.com/overhold-org/Overhold-Wallet.git .`
 3. `npm install`
-4. `cd backend/`
-5. `npm install`
 
 --- 
 
@@ -70,12 +68,11 @@ After having these packages installed, you should be ready for installing the wa
 Instructions for running the wallet, in development mode:
 
 1. Change directory to the project directory and open new terminal window, then run: `npm start`
-2. Change directory to `<project-directory>/backend` and run: `npm start`
-3. Chage directory back to the project directory and run: `npm run electron:serve`
+2. In the project directory run: `npm run electron:serve`
 
 #### Wallet building instructions
 
-Firstly, you will have to build the backend using the [pkg](https://www.npmjs.com/package/pkg) npm module, for the desired platform. After that you should run `npm run electron:$OS`, where $OS is either `linux`, `windows` or `mac` (depending for which platform you're building it).
+You should run `npm run electron:$OS`, where $OS is either `linux`, `windows` or `mac` (depending for which platform you're building it).
 
 ### Contributions
 
