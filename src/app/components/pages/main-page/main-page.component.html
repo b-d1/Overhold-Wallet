@@ -10,7 +10,7 @@
     </div>
     <div class="main-page__container">
       <div class="main-page__title">TOTAL BALANCE</div>
-      <div class="main-page__amount">{{total | number | currency: currency}}</div>
+      <div class="main-page__amount">{{getCurrencySymbol(currency)}}{{getFormattedTotalAmount(total)}}</div>
     </div>
     <main-chart></main-chart>
   </div>

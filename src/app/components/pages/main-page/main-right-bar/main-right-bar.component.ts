@@ -289,7 +289,11 @@ export class MainRightBarComponent implements OnInit, OnDestroy {
 
     public getFormattedTotalAmount(price, amount) {
         const total = new BigNumber(price).times(amount);
-        return Number(total.toString()).toLocaleString('en-US', {maximumFractionDigits: 2});
+        if (this.currentCurrency !== 'BTC') {
+            return Number(total.toString()).toLocaleString('en-US', {maximumFractionDigits: 2, minimumFractionDigits: 2});
+        } else {
+            return Number(total.toString()).toLocaleString('en-US', {maximumFractionDigits: 8});
+        }
     }
 
     public openInExplorer() {
