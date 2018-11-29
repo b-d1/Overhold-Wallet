@@ -46,7 +46,6 @@ details will help people to fix any potential bugs.
 
 For example on how to write bug report, please check the [bug report template](https://github.com/overhold-org/Overhold-Wallet/blob/develop/.github/ISSUE_TEMPLATE/bug-report.md).
 
-
 <a name="features"></a>
 ## Feature requests
 
