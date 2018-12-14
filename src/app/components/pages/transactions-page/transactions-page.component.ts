@@ -129,8 +129,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     }
 
     transformDate(date) {
-        const DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss [GMT]';
-        return moment(moment(date, 'x').format(DATE_RFC2822)).fromNow();
+        const DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss';
+        return moment.utc(date, 'x').format(DATE_RFC2822);
     };
 
 

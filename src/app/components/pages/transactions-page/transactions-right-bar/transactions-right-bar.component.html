@@ -21,7 +21,7 @@
     <div class="row row--transaction">
       <div class="crypto_item arrow_right_blue"></div>
       <div class="info">
-        <div class="name">{{ transaction.transactionDate | date: 'dd MMM yyyy, HH:mm' }}</div>
+        <div class="name">{{ transformDateShort(transaction.transactionDate) }}</div>
         <div class="rate">{{ transformDate(transaction.transactionDate) }}</div>
       </div>
       <div class="info">

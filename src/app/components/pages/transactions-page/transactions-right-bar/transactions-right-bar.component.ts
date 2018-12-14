@@ -58,7 +58,14 @@ export class TransactionsRightBarComponent {
     }
 
     transformDate(date) {
-        const DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss [GMT]';
-        return moment(moment(date, 'x').format(DATE_RFC2822)).fromNow();
+        const DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss';
+        return moment.utc(moment.utc(date, 'x').format(DATE_RFC2822)).fromNow();
+    }
+
+    transformDateShort(date) {
+        const DATE_FORMAT = 'DD MMM YYYY HH:mm';
+        return moment.utc(date, 'x').format(DATE_FORMAT);
     };
+
+
 }
